@@ -1,6 +1,7 @@
 const req = require('request');
 const fs = require('fs');
 const readline = require('readline');
+const chalk = require('chalk');
 
 const HTTP = ['http://', 'https://'];
 
@@ -68,7 +69,7 @@ const readFiles = (filename) => {
  */
 const getCount = (url) => {
   return new Promise((resolve, reject) => {
-    req(url, function (_, res) {
+    req(url, {timeout: 1500}, function (_, res) {
       // console.log(res && res.statusCode);
       if (res && res.statusCode === 200) {
         resolve(1);
@@ -84,25 +85,25 @@ const getCount = (url) => {
  * @param {string} url
  */
 const getStatus = (url) => {
-  return new Promise((resolve, reject) => {
-    req(url, function (_, res) {
-      if (res && res.statusCode === 200) {
-        resolve({ color: 'green', url, status: res.statusCode });
-      } else if (res && (res.statusCode === 400 || res.statusCode === 404)) {
-        resolve({
-          color: 'red',
-          url,
-          status: res ? res.statusCode : 'server is down',
-        });
-      } else {
-        resolve({
-          color: 'grey',
-          url,
-          status: 'unknown',
-        });
+  return new Promise((resolve) => {
+    req(url, {method: 'HEAD', timeout: 1500}, function(_, res) {
+      if(!res) {
+        console.log(chalk.gray(`[???] ${url}`));
+        return resolve();
       }
+
+      const status = res.statusCode;
+      if (status === 200) {
+        console.log(chalk.green(`[200] ${url}`));
+      } else if (status >= 400 || status <= 599) {
+        console.log(chalk.red(`[${status}] ${url}`));
+      } else {
+        console.log(chalk.gray(`[${status}] ${url}`));
+      }
+
+      resolve();
     });
-  });
+  })
 };
 
 /**
@@ -122,13 +123,7 @@ const getNormalCount = (urls) => {
   });
 };
 
-const checkUrls = (urls) => {
-  const promises = [];
-  for (const url of urls) {
-    promises.push(getStatus(url));
-  }
-  return Promise.all(promises);
-};
+const checkUrls = (urls) => Promise.all(urls.map(getStatus));
 
 module.exports = function fileService() {
   return {
