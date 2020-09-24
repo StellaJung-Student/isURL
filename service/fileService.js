@@ -67,10 +67,11 @@ const readFiles = (filename) => {
 /**
  *
  * @param {string} url
+ * @param {number} timeout
  */
-const getCount = (url) => {
+const getCount = (url, timeout) => {
   return new Promise((resolve, reject) => {
-    req(url, { timeout: 1500 }, function (_, res) {
+    req(url, { timeout }, function (_, res) {
       // console.log(res && res.statusCode);
       if (res && res.statusCode === 200) {
         resolve(1);
@@ -84,10 +85,11 @@ const getCount = (url) => {
 /**
  *
  * @param {string} url
+ * @param {number} timeout
  */
-const getStatus = (url) => {
+const getStatus = (url, timeout) => {
   return new Promise((resolve) => {
-    req(url, { method: 'HEAD', timeout: 1500 }, function (_, res) {
+    req(url, { method: 'HEAD', timeout }, function (_, res) {
       if (!res) {
         console.log(chalk.gray(`[???] ${url}`));
         return resolve();
@@ -110,11 +112,12 @@ const getStatus = (url) => {
 /**
  *
  * @param {array} urls
+ * @param {number} timeout
  */
-const getNormalCount = (urls) => {
+const getNormalCount = (urls, timeout) => {
   const promises = [];
   for (const url of urls) {
-    promises.push(getCount(url));
+    promises.push(getCount(url, timeout));
   }
   return Promise.all(promises).then((res) => {
     res.forEach((num) => {
@@ -124,7 +127,14 @@ const getNormalCount = (urls) => {
   });
 };
 
-const checkUrls = (urls) => Promise.all(urls.map(getStatus));
+/**
+ *
+ * @param {array} urls
+ * @param {number} timeout
+ */
+const checkUrls = (urls, timeout) => {
+  return Promise.all(urls.map((url) => getStatus(url, timeout)));
+};
 
 module.exports = function fileService() {
   return {
