@@ -38,7 +38,7 @@ const retrieveUrl = (data) => {
  */
 const readFiles = (filename) => {
   return new Promise(async (resolve, reject) => {
-    const data = [];
+    let data = [];
     const fileStream = fs.createReadStream(filename);
 
     const lines = readline.createInterface({
@@ -56,6 +56,7 @@ const readFiles = (filename) => {
       }
     }
     if (data.length !== 0) {
+      data = Array.from(new Set(data));
       resolve(data);
     } else {
       reject('No http exists');
@@ -69,7 +70,7 @@ const readFiles = (filename) => {
  */
 const getCount = (url) => {
   return new Promise((resolve, reject) => {
-    req(url, {timeout: 1500}, function (_, res) {
+    req(url, { timeout: 1500 }, function (_, res) {
       // console.log(res && res.statusCode);
       if (res && res.statusCode === 200) {
         resolve(1);
@@ -86,8 +87,8 @@ const getCount = (url) => {
  */
 const getStatus = (url) => {
   return new Promise((resolve) => {
-    req(url, {method: 'HEAD', timeout: 1500}, function(_, res) {
-      if(!res) {
+    req(url, { method: 'HEAD', timeout: 1500 }, function (_, res) {
+      if (!res) {
         console.log(chalk.gray(`[???] ${url}`));
         return resolve();
       }
@@ -103,7 +104,7 @@ const getStatus = (url) => {
 
       resolve();
     });
-  })
+  });
 };
 
 /**
