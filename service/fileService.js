@@ -20,15 +20,17 @@ const isURL = (data) => {
  * @param {string} data
  */
 const retrieveUrl = (data) => {
-  const endData = [' ', ')', ']', '}'];
+  const endData = [' ', ')', ']', '}', '"', "'"];
   const startIdx = data.indexOf('http');
-  let endIdx = data.length - 1;
+  let endIdx = data.length;
+  console.log("endData:", data);
   for (let i = 0; i < endData.length; i++) {
     const idx = data.slice(startIdx).indexOf(endData[i]);
     if (idx !== -1) {
       endIdx = endIdx > idx ? idx : endIdx;
     }
   }
+  console.log("endData's index:", endIdx)
   return data.slice(startIdx, startIdx + endIdx);
 };
 
