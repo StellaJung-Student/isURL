@@ -1,4 +1,4 @@
-const versions = ["-v", "/v"];
+const versions = ["-v", "/v", "--v"];
 
 /**
  *
