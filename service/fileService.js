@@ -23,14 +23,12 @@ const retrieveUrl = (data) => {
   const endData = [' ', ')', ']', '}', '"', "'"];
   const startIdx = data.indexOf('http');
   let endIdx = data.length;
-  console.log("endData:", data);
   for (let i = 0; i < endData.length; i++) {
     const idx = data.slice(startIdx).indexOf(endData[i]);
     if (idx !== -1) {
       endIdx = endIdx > idx ? idx : endIdx;
     }
   }
-  console.log("endData's index:", endIdx)
   return data.slice(startIdx, startIdx + endIdx);
 };
 
@@ -93,17 +91,17 @@ const getStatus = (url, timeout) => {
   return new Promise((resolve) => {
     req(url, { method: 'HEAD', timeout }, function (_, res) {
       if (!res) {
-        console.log(chalk.gray(`[???] ${url}`));
+        console.log(chalk.gray(`[unknown] ${url}`));
         return resolve();
       }
 
       const status = res.statusCode;
       if (status === 200) {
-        console.log(chalk.green(`[200] ${url}`));
+        console.log(chalk.green(`[good] ${url}`));
       } else if (status >= 400 || status <= 599) {
-        console.log(chalk.red(`[${status}] ${url}`));
+        console.log(chalk.red(`[bad] ${url}`));
       } else {
-        console.log(chalk.gray(`[${status}] ${url}`));
+        console.log(chalk.gray(`[unknown] ${url}`));
       }
 
       resolve();

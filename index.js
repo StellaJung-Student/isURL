@@ -18,11 +18,10 @@ try {
     process.exit(0);
   }
 
-  const timeout = +argv[3] || 3000;
+  const timeout = +argv[3] || 120000;
   fileService
     .readFiles(argv[2])
     .then((urls) => {
-      console.log("timeout:", timeout);
       fileService.checkUrls(urls, timeout).catch((err) => console.log(err));
     })
     .catch((err) => console.error(err));
