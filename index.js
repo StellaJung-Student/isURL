@@ -11,20 +11,26 @@ try {
     throw new Error("Please provide a filename");
   }
 
-  if (utilService.isVersion(argv.slice(1))) {
-    console.log(chalk.green(`************************`));
-    console.log(chalk.green(`*        ${version}         *`));
-    console.log(chalk.green(`************************`));
-    process.exit(0);
+  else if(argv.length == 2){
+    if (utilService.isVersion(argv.slice(1))) {
+      console.log(chalk.green(`************************`));
+      console.log(chalk.green(`*        ${version}         *`));
+      console.log(chalk.green(`************************`));
+      process.exit(0);
+    }
   }
 
-  const timeout = +argv[3] || 120000;
-  fileService
-    .readFiles(argv[2])
-    .then((urls) => {
-      fileService.checkUrls(urls, timeout).catch((err) => console.log(err));
-    })
-    .catch((err) => console.error(err));
+  else{
+    for(let i = 2; i < argv.length; i++){
+      const timeout = +argv[i+1] || 120000;
+      fileService
+        .readFiles(argv[i])
+        .then((urls) => {
+          fileService.checkUrls(urls, timeout).catch((err) => console.log(err));
+        })
+        .catch((err) => console.error(err));
+    }
+  }
 } catch (err) {
   console.error(err.message);
 }

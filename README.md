@@ -21,6 +21,7 @@
 ```
     1. default
     > http-parser urls.txt or node index.js urls.txt
+    > http-parser urls1.txt urls2.html or node index.js urls1.txt urls2.html
 
     2. With timeout [ms]
     > http-parser urls.txt 5000 or node index.js urls.txt 5000
