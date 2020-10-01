@@ -21,7 +21,7 @@ try {
   }
 
   else{
-    for(var i = 2; i < argv.length; i++){
+    for(let i = 2; i < argv.length; i++){
       const timeout = +argv[i+1] || 120000;
       fileService
         .readFiles(argv[i])
