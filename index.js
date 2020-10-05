@@ -10,19 +10,15 @@ try {
   if (argv.length < 3) {
     throw new Error("Please provide a filename");
   }
-
-  else if(argv.length == 2){
+  else {
     if (utilService.isVersion(argv.slice(1))) {
       console.log(chalk.green(`************************`));
       console.log(chalk.green(`*        ${version}         *`));
       console.log(chalk.green(`************************`));
       process.exit(0);
     }
-  }
-
-  else{
-    for(let i = 2; i < argv.length; i++){
-      const timeout = +argv[i+1] || 120000;
+    for (let i = 2; i < argv.length; i++) {
+      const timeout = +argv[i + 1] || 120000;
       fileService
         .readFiles(argv[i])
         .then((urls) => {
