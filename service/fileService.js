@@ -37,6 +37,7 @@ const retrieveUrl = (data) => {
  * @param {string} filename
  */
 const readFiles = (filename) => {
+  console.log("ff", filename)
   return new Promise(async (resolve, reject) => {
     let data = [];
     const fileStream = fs.createReadStream(filename);
@@ -86,21 +87,23 @@ const getCount = (url, timeout) => {
  *
  * @param {string} url
  * @param {number} timeout
+ * @param {string} filter
  */
-const getStatus = (url, timeout) => {
+const getStatus = (url, timeout, filter) => {
   return new Promise((resolve) => {
     req(url, { method: 'HEAD', timeout }, function (_, res) {
       if (!res) {
-        console.log(chalk.gray(`[unknown] ${url}`));
+        if (filter === "all") {
+          console.log(chalk.gray(`[unknown] ${url}`));
+        }
         return resolve();
       }
-
       const status = res.statusCode;
-      if (status === 200) {
+      if (status === 200 && (filter === "all" || filter === "good")) {
         console.log(chalk.green(`[good] ${url}`));
-      } else if (status >= 400 || status <= 599) {
+      } else if ((status >= 400 || status <= 599) && (filter === "all" || filter === "bad")) {
         console.log(chalk.red(`[bad] ${url}`));
-      } else {
+      } else if (filter === "all" || filter === "bad") {
         console.log(chalk.gray(`[unknown] ${url}`));
       }
 
@@ -131,9 +134,10 @@ const getNormalCount = (urls, timeout) => {
  *
  * @param {array} urls
  * @param {number} timeout
+ * @param {string} filter
  */
-const checkUrls = (urls, timeout) => {
-  return Promise.all(urls.map((url) => getStatus(url, timeout)));
+const checkUrls = (urls, timeout, filter) => {
+  return Promise.all(urls.map((url) => getStatus(url, timeout, filter)));
 };
 
 module.exports = function fileService() {

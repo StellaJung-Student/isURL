@@ -9,25 +9,30 @@
 ```
   1. Global mode
     npm install -g https://github.com/StellaJung-Student/http-parser
-    http-parser urls.txt
+    http-parser -f urls.txt
 
   2. Local mode
     npm intall
-    node index.js urls.txt
+    node index.js -f urls.txt
 ```
 
 **How can I use**
 
 ```
     1. default
-    > http-parser urls.txt or node index.js urls.txt
-    > http-parser urls1.txt urls2.html or node index.js urls1.txt urls2.html
+    > http-parser -f urls.txt or node index.js -f urls.txt
+    > http-parser -f urls1.txt -f urls2.html or node index.js -f urls1.txt -f urls2.html
 
     2. With timeout [ms]
-    > http-parser urls.txt 5000 or node index.js urls.txt 5000
+    > http-parser -f urls.txt -t 5000 or node index.js -f urls.txt -t 5000
 
-    3. version check
-    > http-parser -v or http-parser /v
+    3. With filter
+    > http-parser -f urls.txt --good
+    > http-parser -f urls.txt --bad
+    > http-parser -f urls.txt --all cf) --all is default
+    
+    4. version check
+    > http-parser -v or http-parser --version
 ```
 
 **Color Desription**

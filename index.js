@@ -1,31 +1,59 @@
 #!/usr/bin/env node
 
 const chalk = require("chalk");
-const version = require("./package.json").version;
+const { version } = require("./package.json");
+const yargs = require("yargs");
 const fileService = require("./service/fileService")();
 const utilService = require("./service/utilService")();
 
 try {
-  const { argv } = process;
-  if (argv.length < 3) {
-    throw new Error("Please provide a filename");
+  const argv = yargs
+    .scriptName("http-parser")
+    .usage("Usage: $0 [option]")
+    .option("f", {
+      alias: "file",
+      describe: "Please provide a filename",
+      type: "string",
+      demandOption: true
+    }).
+    option("t", {
+      alias: 'time',
+      describe: 'Provide ms for waiting for a request',
+      type: 'number'
+    }).
+    option("a", {
+      alias: 'all',
+    }).
+    option("g", {
+      alias: 'good',
+    }).
+    option("b", {
+      alias: 'bad',
+    })
+    .alias("h", "help")
+    .help("h", "Show usage information & exit")
+    .alias("v", "version")
+    .version('version', chalk.green(`http-parser's version is ${version}`))
+    .argv;
+
+  const file = typeof argv.file === "object" ? [...argv.file] : [argv.file];
+  const { good, bad } = argv;
+  let filter = "all";
+  if (good) {
+    filter = "good";
+  } else if (bad) {
+    filter = "bad";
   }
-  else {
-    if (utilService.isVersion(argv.slice(1))) {
-      console.log(chalk.green(`************************`));
-      console.log(chalk.green(`*        ${version}         *`));
-      console.log(chalk.green(`************************`));
-      process.exit(0);
-    }
-    for (let i = 2; i < argv.length; i++) {
-      const timeout = +argv[i + 1] || 120000;
-      fileService
-        .readFiles(argv[i])
-        .then((urls) => {
-          fileService.checkUrls(urls, timeout).catch((err) => console.log(err));
-        })
-        .catch((err) => console.error(err));
-    }
+
+  for (let i = 0; i < file.length; i++) {
+    /** @type {any} */
+    const timeout = argv.time || 120000;
+    fileService
+      .readFiles(file[i])
+      .then((urls) => {
+        fileService.checkUrls(urls, timeout, filter).catch((err) => console.log(err));
+      })
+      .catch((err) => console.error(err));
   }
 } catch (err) {
   console.error(err.message);
