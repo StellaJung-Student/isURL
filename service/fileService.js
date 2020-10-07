@@ -86,24 +86,40 @@ const getCount = (url, timeout) => {
  *
  * @param {string} url
  * @param {number} timeout
+ * @param {boolean} isColor
  */
-const getStatus = (url, timeout) => {
+const getStatus = (url, timeout, isColor) => {
   return new Promise((resolve) => {
     req(url, { method: 'HEAD', timeout }, function (_, res) {
       if (!res) {
-        console.log(chalk.gray(`[unknown] ${url}`));
+        if (isColor) {
+          console.log(chalk.gray(`[unknown] ${url}`));
+        } else {
+          console.log(`[unknown] ${url}`);
+        }
         return resolve();
       }
 
       const status = res.statusCode;
       if (status === 200) {
-        console.log(chalk.green(`[good] ${url}`));
+        if (isColor) {
+          console.log(chalk.green(`[good] ${url}`));
+        } else {
+          console.log(`[good] ${url}`);
+        }
       } else if (status >= 400 || status <= 599) {
-        console.log(chalk.red(`[bad] ${url}`));
+        if (isColor) {
+          console.log(chalk.red(`[bad] ${url}`));
+        } else {
+          console.log(`[bad] ${url}`);
+        }
       } else {
-        console.log(chalk.gray(`[unknown] ${url}`));
+        if (isColor) {
+          console.log(chalk.gray(`[unknown] ${url}`));
+        } else {
+          console.log(`[unknown] ${url}`);
+        }
       }
-
       resolve();
     });
   });
@@ -131,9 +147,10 @@ const getNormalCount = (urls, timeout) => {
  *
  * @param {array} urls
  * @param {number} timeout
+ * @param {boolean} isColor
  */
-const checkUrls = (urls, timeout) => {
-  return Promise.all(urls.map((url) => getStatus(url, timeout)));
+const checkUrls = (urls, timeout, isColor) => {
+  return Promise.all(urls.map((url) => getStatus(url, timeout, isColor)));
 };
 
 module.exports = function fileService() {
