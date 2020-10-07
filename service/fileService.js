@@ -136,10 +136,8 @@ const checkUrls = (urls, timeout) => {
   return Promise.all(urls.map((url) => getStatus(url, timeout)));
 };
 
-module.exports = function fileService() {
-  return {
-    readFiles,
-    getNormalCount,
-    checkUrls,
-  };
+module.exports = {
+  readFiles,
+  getNormalCount,
+  checkUrls,
 };

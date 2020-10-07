@@ -2,8 +2,8 @@
 
 const chalk = require("chalk");
 const version = require("./package.json").version;
-const fileService = require("./service/fileService")();
-const utilService = require("./service/utilService")();
+const fileService = require("./service/fileService");
+const utilService = require("./service/utilService");
 
 try {
   const { argv } = process;
