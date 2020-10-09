@@ -37,7 +37,6 @@ const retrieveUrl = (data) => {
  * @param {string} filename
  */
 const readFiles = (filename) => {
-  console.log("ff", filename)
   return new Promise(async (resolve, reject) => {
     let data = [];
     const fileStream = fs.createReadStream(filename);
@@ -88,25 +87,42 @@ const getCount = (url, timeout) => {
  * @param {string} url
  * @param {number} timeout
  * @param {string} filter
+ * @param {boolean} isColor
  */
-const getStatus = (url, timeout, filter) => {
+const getStatus = (url, timeout, filter, isColor) => {
   return new Promise((resolve) => {
     req(url, { method: 'HEAD', timeout }, function (_, res) {
       if (!res) {
         if (filter === "all") {
-          console.log(chalk.gray(`[unknown] ${url}`));
+          if (isColor) {
+            console.log(chalk.gray(`[unknown] ${url}`));
+          } else {
+            console.log(`[unknown] ${url}`);
+          }
         }
         return resolve();
       }
+
       const status = res.statusCode;
       if (status === 200 && (filter === "all" || filter === "good")) {
-        console.log(chalk.green(`[good] ${url}`));
+        if (isColor) {
+          console.log(chalk.green(`[good] ${url}`));
+        } else {
+          console.log(`[good] ${url}`);
+        }
       } else if ((status >= 400 || status <= 599) && (filter === "all" || filter === "bad")) {
-        console.log(chalk.red(`[bad] ${url}`));
+        if (isColor) {
+          console.log(chalk.red(`[bad] ${url}`));
+        } else {
+          console.log(`[bad] ${url}`);
+        }
       } else if (filter === "all" || filter === "bad") {
-        console.log(chalk.gray(`[unknown] ${url}`));
+        if (isColor) {
+          console.log(chalk.gray(`[unknown] ${url}`));
+        } else {
+          console.log(`[unknown] ${url}`);
+        }
       }
-
       resolve();
     });
   });
@@ -135,10 +151,11 @@ const getNormalCount = (urls, timeout) => {
  * @param {array} urls
  * @param {number} timeout
  * @param {string} filter
+ * @param {boolean} isColor
  */
-const checkUrls = (urls, timeout, filter) => {
-  return Promise.all(urls.map((url) => getStatus(url, timeout, filter)));
-};
+const checkUrls = (urls, timeout, filter, isColor) => {
+  return Promise.all(urls.map((url) => getStatus(url, timeout, filter, isColor)));
+}
 
 module.exports = function fileService() {
   return {

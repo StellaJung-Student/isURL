@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-
+require("dotenv").config();
 const chalk = require("chalk");
 const { version } = require("./package.json");
 const yargs = require("yargs");
 const fileService = require("./service/fileService")();
-const utilService = require("./service/utilService")();
 
 try {
   const argv = yargs
@@ -45,13 +44,15 @@ try {
     filter = "bad";
   }
 
+  const isColor = (process.env.CLICOLOR !== "false" && process.env.CLICOLOR !== "0") || false;
+
   for (let i = 0; i < file.length; i++) {
     /** @type {any} */
     const timeout = argv.time || 120000;
     fileService
       .readFiles(file[i])
       .then((urls) => {
-        fileService.checkUrls(urls, timeout, filter).catch((err) => console.log(err));
+        fileService.checkUrls(urls, timeout, filter, isColor);
       })
       .catch((err) => console.error(err));
   }
