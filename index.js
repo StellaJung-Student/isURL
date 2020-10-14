@@ -3,7 +3,7 @@ require("dotenv").config();
 const chalk = require("chalk");
 const { version } = require("./package.json");
 const yargs = require("yargs");
-const fileService = require("./service/fileService")();
+const fileService = require("./service/fileService");
 
 try {
   const argv = yargs
