@@ -157,10 +157,8 @@ const checkUrls = (urls, timeout, filter, isColor) => {
   return Promise.all(urls.map((url) => getStatus(url, timeout, filter, isColor)));
 }
 
-module.exports = function fileService() {
-  return {
-    readFiles,
-    getNormalCount,
-    checkUrls,
-  };
+module.exports = {
+  readFiles,
+  getNormalCount,
+  checkUrls,
 };

@@ -10,6 +10,9 @@
   1. Global mode
     npm install -g https://github.com/StellaJung-Student/http-parser
     http-parser -f urls.txt
+    Or
+    npm install https://github.com/StellaJung-Student/http-parser
+    npx http-parser -f urls.txt
 
   2. Local mode
     npm intall

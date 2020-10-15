@@ -10,8 +10,6 @@ const isVersion = (argv) => {
   );
 };
 
-module.exports = function utilService() {
-  return {
-    isVersion,
-  };
+module.exports = {
+  isVersion,
 };
