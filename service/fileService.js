@@ -44,8 +44,9 @@ const readFiles = (filename, fileIgnore = null) => new Promise(async (resolve, r
     if (fileIgnore) {
       // @ts-ignore
       const ignoreStream = fs.createReadStream(fileIgnore);
-      
 
+      ignoreStream.on('error', () => console.log(`Could not find file: ${fileIgnore}`));
+      
       const linesIgnore = readline.createInterface({
         input: ignoreStream,
         crlfDelay: Infinity
@@ -67,6 +68,7 @@ const readFiles = (filename, fileIgnore = null) => new Promise(async (resolve, r
 
     let data = [];
     const fileStream = fs.createReadStream(filename);
+    fileStream.on('error', () => console.log(`Could not find file: ${filename}`));
     const lines = readline.createInterface({
       input: fileStream,
       crlfDelay: Infinity,
