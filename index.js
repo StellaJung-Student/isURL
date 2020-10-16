@@ -14,8 +14,13 @@ try {
       describe: "Please provide a filename",
       type: "string",
       demandOption: true
+    })
+    .option('i', {
+      alias: 'ignore',
+      describe: 'Please provide a file with URLs to ignore.',
+      type: 'string'
     }).
-    option("t", {
+    option('t', {
       alias: 'time',
       describe: 'Provide ms for waiting for a request',
       type: 'number'
@@ -36,6 +41,7 @@ try {
     .argv;
 
   const file = typeof argv.file === "object" ? [...argv.file] : [argv.file];
+  const ignore = argv.i ? [argv.i] : false;
   const { good, bad } = argv;
   let filter = "all";
   if (good) {
@@ -43,14 +49,14 @@ try {
   } else if (bad) {
     filter = "bad";
   }
-
+  
   const isColor = (process.env.CLICOLOR !== "false" && process.env.CLICOLOR !== "0") || false;
 
   for (let i = 0; i < file.length; i++) {
     /** @type {any} */
     const timeout = argv.time || 120000;
     fileService
-      .readFiles(file[i])
+      .readFiles(file[i], ignore[0])
       .then((urls) => {
         fileService.checkUrls(urls, timeout, filter, isColor);
       })
