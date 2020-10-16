@@ -33,8 +33,11 @@
     > http-parser -f urls.txt --good
     > http-parser -f urls.txt --bad
     > http-parser -f urls.txt --all cf) --all is default
+
+    4. optional ignoring urls from file
+    > http-parser -i ignoreurls.txt -f urls.txt
     
-    4. version check
+    5. version check
     > http-parser -v or http-parser --version
 ```
 
@@ -44,3 +47,18 @@
   - 200 : Green
   - 400 or 404 : Red
   - Others : Grey
+
+**Version history**
+
+  - 1.1.0 added new feature of ignoring urls
+```
+  -i or --ignore filename
+  in the filename, the content will be like
+  
+  # This is a valid file to ignore URLs.
+  # Ignore CBC website: 
+  http://www.cbc.ca
+
+  # This is invalid.  It doesn't use http:// or https://
+  www.google.com
+```
