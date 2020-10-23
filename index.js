@@ -59,7 +59,7 @@ function main() {
       fileService
         .readFiles(file[i], ignore[0])
         .then((urls) => {
-          fileService.checkUrls(urls, timeout, filter, isColor);
+          fileService.processToParseUrls(urls, timeout, filter, isColor);
         })
         .catch((err) => console.error(err));
     }

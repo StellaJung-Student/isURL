@@ -49,7 +49,7 @@ const readFiles = (filename, fileIgnore = null) => new Promise(async (resolve, r
         crlfDelay: Infinity
       });
    
-      const regexIgnore = /^(https:\/\/|http:\/\/|#)([\w+\-&@`~#$%^*.=\/?: ]*)/;
+      const regexIgnore = /^(http(s):\/\/|#)([\w+\-&@`~#$%^*.=\/?: ]*)/;
 
       try {
         let validFile = 0
@@ -182,7 +182,7 @@ const getNormalCount = (urls, timeout) => {
  * @param {string} filter
  * @param {boolean} isColor
  */
-const checkUrls = (urls, timeout, filter, isColor) => {
+const processToParseUrls = (urls, timeout, filter, isColor) => {
   return Promise.all(
     urls.map((url) => getStatus(url, timeout, filter, isColor))
   );
@@ -191,5 +191,5 @@ const checkUrls = (urls, timeout, filter, isColor) => {
 module.exports = {
   readFiles,
   getNormalCount,
-  checkUrls,
+  processToParseUrls,
 };
