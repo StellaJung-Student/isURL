@@ -3,15 +3,12 @@ const fs = require("fs");
 const readline = require("readline");
 const chalk = require("chalk");
 
-const HTTP = ["http://", "https://"];
-
-let count = 0;
-
 /**
  *
  * @param {string} data
  */
 const isURL = (data) => {
+  const HTTP = ["http://", "https://"];
   return HTTP.some((e) => data.includes(e));
 };
 
@@ -52,7 +49,7 @@ const readFiles = (filename, fileIgnore = null) => new Promise(async (resolve, r
         crlfDelay: Infinity
       });
    
-      const regexIgnore = /^(https:\/\/|http:\/\/|#)([\w+\-&@`~#$%^*.=\/?: ]*)/;
+      const regexIgnore = /^(http(s):\/\/|#)([\w+\-&@`~#$%^*.=\/?: ]*)/;
 
       try {
         let validFile = 0
@@ -165,6 +162,7 @@ const getStatus = (url, timeout, filter, isColor) => {
  * @param {number} timeout
  */
 const getNormalCount = (urls, timeout) => {
+  let count = 0;
   const promises = [];
   for (const url of urls) {
     promises.push(getCount(url, timeout));
@@ -184,7 +182,7 @@ const getNormalCount = (urls, timeout) => {
  * @param {string} filter
  * @param {boolean} isColor
  */
-const checkUrls = (urls, timeout, filter, isColor) => {
+const processToParseUrls = (urls, timeout, filter, isColor) => {
   return Promise.all(
     urls.map((url) => getStatus(url, timeout, filter, isColor))
   );
@@ -193,5 +191,5 @@ const checkUrls = (urls, timeout, filter, isColor) => {
 module.exports = {
   readFiles,
   getNormalCount,
-  checkUrls,
+  processToParseUrls,
 };
