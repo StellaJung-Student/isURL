@@ -3,15 +3,12 @@ const fs = require("fs");
 const readline = require("readline");
 const chalk = require("chalk");
 
-const HTTP = ["http://", "https://"];
-
-let count = 0;
-
 /**
  *
  * @param {string} data
  */
 const isURL = (data) => {
+  const HTTP = ["http://", "https://"];
   return HTTP.some((e) => data.includes(e));
 };
 
@@ -165,6 +162,7 @@ const getStatus = (url, timeout, filter, isColor) => {
  * @param {number} timeout
  */
 const getNormalCount = (urls, timeout) => {
+  let count = 0;
   const promises = [];
   for (const url of urls) {
     promises.push(getCount(url, timeout));
