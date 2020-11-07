@@ -39,6 +39,9 @@
     
     5. version check
     > http-parser -v or http-parser --version
+
+    6. from local server
+    > http-parser -l
 ```
 
 **Color Desription**
@@ -61,4 +64,10 @@
 
   # This is invalid.  It doesn't use http:// or https://
   www.google.com
+```
+  - 1.2.0 
+```
+  -l or --local
+  In this case, the pre condition is http://localhost:3000 should run - telescope.
+  This option provides the latest 10 blogs url into post.txt
 ```

@@ -1,12 +1,13 @@
 {
   "name": "http-parser",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "bin": {
     "http-parser": "./index.js"
   },
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
