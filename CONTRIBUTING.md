@@ -51,26 +51,21 @@
   - 400 or 404 : Red
   - Others : Grey
 
-**Version history**
+**Usage - Prettier**
 
-- 1.1.0 added new feature of ignoring urls
+- Apply prettier
+  - npm run prettier-fix
+- Check prettier formatting
+  - npm run prettier
 
-```
-  -i or --ignore filename
-  in the filename, the content will be like
+**Usage - Eslint**
 
-  # This is a valid file to ignore URLs.
-  # Ignore CBC website:
-  http://www.cbc.ca
+- Apply eslint
+  - npm run eslint-fix
+- Check eslint standard
+  - npm run eslint
 
-  # This is invalid.  It doesn't use http:// or https://
-  www.google.com
-```
+\*\*Integration to VScode
 
-- 1.2.0
-
-```
-  -l or --local
-  In this case, the pre condition is http://localhost:3000 should run - telescope.
-  This option provides the latest 10 blogs url into post.txt
-```
+- Recommendation to install ESLint and Prettier.
+- check .vscode folder's settings.json and [here](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)

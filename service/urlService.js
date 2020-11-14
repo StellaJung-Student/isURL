@@ -1,14 +1,13 @@
-const req = require("request");
-const chalk = require("chalk");
-const fileService = require("./fileService");
-const fs = require("fs");
+const req = require('request');
+const chalk = require('chalk');
+const fs = require('fs');
 
 /**
  *
  * @param {string} data
  */
 const isURL = (data) => {
-  const HTTP = ["http://", "https://"];
+  const HTTP = ['http://', 'https://'];
   return HTTP.some((e) => data.includes(e));
 };
 
@@ -17,8 +16,8 @@ const isURL = (data) => {
  * @param {string} data
  */
 const retrieveUrl = (data) => {
-  const endData = [" ", ")", "]", "}", '"', "'"];
-  const startIdx = data.indexOf("http");
+  const endData = [' ', ')', ']', '}', '"', "'"];
+  const startIdx = data.indexOf('http');
   let endIdx = data.length;
   for (let i = 0; i < endData.length; i++) {
     const idx = data.slice(startIdx).indexOf(endData[i]);
@@ -36,13 +35,12 @@ const retrieveUrl = (data) => {
  */
 const getCount = (url, timeout) => {
   return new Promise((resolve, reject) => {
-    req(url, { timeout }, function (_, res) {
+    req(url, { timeout }, (_, res) => {
       // console.log(res && res.statusCode);
       if (res && res.statusCode === 200) {
-        resolve(1);
-      } else {
-        resolve(0);
+        return resolve(1);
       }
+      return resolve(0);
     });
   });
 };
@@ -55,10 +53,10 @@ const getCount = (url, timeout) => {
  * @param {boolean} isColor
  */
 const getStatus = (url, timeout, filter, isColor) => {
-  return new Promise((resolve) => {
-    req(url, { method: "HEAD", timeout }, function (_, res) {
+  return new Promise((resolve, reject) => {
+    req(url, { method: 'HEAD', timeout }, (_, res) => {
       if (!res) {
-        if (filter === "all") {
+        if (filter === 'all') {
           if (isColor) {
             console.log(chalk.gray(`[unknown] ${url}`));
           } else {
@@ -69,29 +67,26 @@ const getStatus = (url, timeout, filter, isColor) => {
       }
 
       const status = res.statusCode;
-      if (status === 200 && (filter === "all" || filter === "good")) {
+      if (status === 200 && (filter === 'all' || filter === 'good')) {
         if (isColor) {
           console.log(chalk.green(`[good] ${url}`));
         } else {
           console.log(`[good] ${url}`);
         }
-      } else if (
-        (status >= 400 || status <= 599) &&
-        (filter === "all" || filter === "bad")
-      ) {
+      } else if ((status >= 400 || status <= 599) && (filter === 'all' || filter === 'bad')) {
         if (isColor) {
           console.log(chalk.red(`[bad] ${url}`));
         } else {
           console.log(`[bad] ${url}`);
         }
-      } else if (filter === "all" || filter === "bad") {
+      } else if (filter === 'all' || filter === 'bad') {
         if (isColor) {
           console.log(chalk.gray(`[unknown] ${url}`));
         } else {
           console.log(`[unknown] ${url}`);
         }
       }
-      resolve();
+      return resolve();
     });
   });
 };
@@ -123,17 +118,15 @@ const getNormalCount = (urls, timeout) => {
  * @param {boolean} isColor
  */
 const processToParseUrls = (urls, timeout, filter, isColor) => {
-  return Promise.all(
-    urls.map((url) => getStatus(url, timeout, filter, isColor))
-  );
+  return Promise.all(urls.map((url) => getStatus(url, timeout, filter, isColor)));
 };
 
 const getContentFromLocalServer = (url, timeout, filter, isColor) => {
   return new Promise((resolve, reject) => {
     // for localhost:3000
-    req(url, { timeout }, function (_, res) {
+    req(url, { timeout }, (_, res) => {
       if (!res) {
-        if (filter === "all") {
+        if (filter === 'all') {
           if (isColor) {
             console.log(chalk.gray(`[unknown] ${url}`));
           } else {
@@ -142,23 +135,24 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
         }
         return resolve();
       }
-      const result = JSON.parse(res.body).map(post => `${url}/${post.id}`);
+      const result = JSON.parse(res.body).map((post) => `${url}/${post.id}`);
       try {
-        fs.writeFile(`posts.txt`, result.join("\n"), (err) => {
-          if(err) throw err;
-          resolve();
+        fs.writeFile(`posts.txt`, result.join('\n'), (err) => {
+          if (err) throw err;
+          return resolve();
         });
-      } catch(err) {
-        reject(err);
+      } catch (err) {
+        return reject(err);
       }
-    })
-  })
-}
+      return reject();
+    });
+  });
+};
 
 module.exports = {
   isURL,
   retrieveUrl,
   getNormalCount,
   processToParseUrls,
-  getContentFromLocalServer
+  getContentFromLocalServer,
 };
