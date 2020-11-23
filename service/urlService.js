@@ -55,8 +55,10 @@ const getCount = (url, timeout) => {
 const getStatus = (url, timeout, filter, isColor) => {
   return new Promise((resolve, reject) => {
     req(url, { method: 'HEAD', timeout }, (_, res) => {
+      let message;
       if (!res) {
         if (filter === 'all') {
+          message = `[unknown] ${url}`;
           if (isColor) {
             console.log(chalk.gray(`[unknown] ${url}`));
           } else {
@@ -68,25 +70,28 @@ const getStatus = (url, timeout, filter, isColor) => {
 
       const status = res.statusCode;
       if (status === 200 && (filter === 'all' || filter === 'good')) {
+        message = `[good] ${url}`;
         if (isColor) {
           console.log(chalk.green(`[good] ${url}`));
         } else {
           console.log(`[good] ${url}`);
         }
       } else if ((status >= 400 || status <= 599) && (filter === 'all' || filter === 'bad')) {
+        message = `[bad] ${url}`;
         if (isColor) {
           console.log(chalk.red(`[bad] ${url}`));
         } else {
           console.log(`[bad] ${url}`);
         }
       } else if (filter === 'all' || filter === 'bad') {
+        message = `[unknown] ${url}`;
         if (isColor) {
           console.log(chalk.gray(`[unknown] ${url}`));
         } else {
           console.log(`[unknown] ${url}`);
         }
       }
-      return resolve();
+      return resolve(message);
     });
   });
 };
@@ -99,15 +104,22 @@ const getStatus = (url, timeout, filter, isColor) => {
 const getNormalCount = (urls, timeout) => {
   let count = 0;
   const promises = [];
-  for (const url of urls) {
-    promises.push(getCount(url, timeout));
-  }
-  return Promise.all(promises).then((res) => {
-    res.forEach((num) => {
-      count += num;
+  try {
+    for (const url of urls) {
+      promises.push(getCount(url, timeout));
+    }
+    return Promise.all(promises).then((res) => {
+      res.forEach((num) => {
+        count += num;
+      });
+      if (count === 0) {
+        throw new Error('No urls');
+      }
+      return count;
     });
-    return count;
-  });
+  } catch (err) {
+    return Promise.reject(err);
+  }
 };
 
 /**
@@ -122,6 +134,7 @@ const processToParseUrls = (urls, timeout, filter, isColor) => {
 };
 
 const getContentFromLocalServer = (url, timeout, filter, isColor) => {
+  console.log(url, timeout, filter, isColor);
   return new Promise((resolve, reject) => {
     // for localhost:3000
     req(url, { timeout }, (_, res) => {
@@ -133,9 +146,12 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
             console.log(`[unknown] ${url}`);
           }
         }
-        return resolve();
+        return reject(new Error('no response'));
       }
       const result = JSON.parse(res.body).map((post) => `${url}/${post.id}`);
+      if (result.length === 0) {
+        reject(new Error('Server is not working'));
+      }
       try {
         fs.writeFile(`posts.txt`, result.join('\n'), (err) => {
           if (err) throw err;
@@ -152,6 +168,7 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
 module.exports = {
   isURL,
   retrieveUrl,
+  getStatus,
   getNormalCount,
   processToParseUrls,
   getContentFromLocalServer,

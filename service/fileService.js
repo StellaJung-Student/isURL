@@ -16,7 +16,7 @@ const readFiles = (filename, fileIgnore = null) =>
       // @ts-ignore
       const ignoreStream = fs.createReadStream(fileIgnore);
 
-      ignoreStream.on('error', () => console.log(`Could not find file: ${fileIgnore}`));
+      ignoreStream.on('error', () => reject(new Error(`Could not find file: ${fileIgnore}`)));
 
       const linesIgnore = readline.createInterface({
         input: ignoreStream,
@@ -43,7 +43,7 @@ const readFiles = (filename, fileIgnore = null) =>
 
     let data = [];
     const fileStream = fs.createReadStream(filename);
-    fileStream.on('error', () => console.log(`Could not find file: ${filename}`));
+    fileStream.on('error', () => reject(new Error(`Could not find file: ${filename}`)));
     const lines = readline.createInterface({
       input: fileStream,
       crlfDelay: Infinity,

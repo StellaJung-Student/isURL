@@ -74,6 +74,7 @@ async function main() {
     }
 
     for (let i = 0; i < file.length; i++) {
+      console.log(file[i], ignore[0]);
       fileService
         .readFiles(file[i], ignore[0])
         .then((urls) => {
@@ -82,7 +83,7 @@ async function main() {
         .catch((err) => console.error(err));
     }
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
   }
 }
 
