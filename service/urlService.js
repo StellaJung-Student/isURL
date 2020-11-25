@@ -160,7 +160,7 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
       } catch (err) {
         return reject(err);
       }
-      return reject();
+      return reject(new Error('Server is not working'));
     });
   });
 };
