@@ -1,0 +1,216 @@
+[33mcommit 78194b1a326a3e80a05fd2ef949d4eb54724b6c7[m[33m ([m[1;36mHEAD -> [m[1;32madd-more-tests[m[33m, [m[1;31morigin/add-more-tests[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Nov 25 12:12:27 2020 -0500
+
+    fixed failed cases
+
+[33mcommit 8b67c88ac9362a280d1f8315f3d8f46868e492c0[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Nov 25 11:52:10 2020 -0500
+
+    added more cases
+
+[33mcommit d51718aa70d898bc79a31cd62902e08928fdc4b8[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Nov 25 11:23:38 2020 -0500
+
+    added github action for ci
+
+[33mcommit 33205d55df11c9c336bf6ebe0ac964faf89d0a87[m[33m ([m[1;32mtesting[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Mon Nov 23 01:08:20 2020 -0500
+
+    adding test cases, but some parts make me confused about how to test
+
+[33mcommit 423fd029a4384c3f5177fd0f5be6767217a20885[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sat Nov 14 17:31:09 2020 -0500
+
+    Applying coding standard squashing from lab7:
+    
+      * added pre-commit hook
+      * added integration to vscode
+      * applied eslint
+      * applied prettier
+      * added contributing document
+
+[33mcommit aba7dcd37545445d72bf550adcdb5c6112c4f135[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sat Nov 7 16:20:24 2020 -0500
+
+    added local option for telescope local server
+
+[33mcommit 9e4cd53e573fd6006f0717f533640e2dad95be99[m[33m ([m[1;32mrefactoring-duplication[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Fri Oct 23 00:38:43 2020 -0400
+
+    Refactoring http-parser to improve code maintainability:
+    
+      * used function instead of variable
+      * got rid of global variables
+      * removed duplicated regex and rename the methods
+
+[33mcommit 367104a7f1a23e6cf28465d74a8b481ccae06865[m[33m ([m[1;31mpedro/issue-11[m[33m, [m[1;31morigin/issue-11-fix[m[33m, [m[1;32missue-11-fix[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Fri Oct 16 11:33:48 2020 -0400
+
+    modify readme file and version based on issue-11
+
+[33mcommit 2f17e21ccc45e5ab2a7e06ad7eb78b06686fd62e[m[33m ([m[1;32missue-11[m[33m)[m
+Author: Pedro Fonseca <60857409+PedroFonsecaDEV@users.noreply.github.com>
+Date:   Fri Oct 16 02:16:36 2020 -0400
+
+    lab4 done
+
+[33mcommit e8fb92f6a8faf59b64a4fca7a6e6ffb9f4ae2204[m
+Author: Pedro Fonseca <60857409+PedroFonsecaDEV@users.noreply.github.com>
+Date:   Fri Oct 16 02:08:46 2020 -0400
+
+    lab4
+
+[33mcommit 6f49c6e9ef1146ed369d3de0ecc340e2cffcbf52[m[33m ([m[1;31mpedro/master[m[33m)[m
+Merge: dedac90 8cfa21f
+Author: Pedro Fonseca <60857409+PedroFonsecaDEV@users.noreply.github.com>
+Date:   Thu Oct 15 15:23:55 2020 -0400
+
+    Merge branch 'master' of https://github.com/StellaJung-Student/http-parser
+    REBASE #1
+
+[33mcommit dedac9038d04f8be30937adf5cc0c85f3d928727[m
+Author: Pedro Fonseca <60857409+PedroFonsecaDEV@users.noreply.github.com>
+Date:   Thu Oct 15 15:19:57 2020 -0400
+
+    1
+
+[33mcommit b02d30f5ce1fc7237e361dd43f1f0b178f7c5cd9[m
+Author: Pedro Fonseca <60857409+PedroFonsecaDEV@users.noreply.github.com>
+Date:   Thu Oct 15 15:19:53 2020 -0400
+
+    1
+
+[33mcommit 8cfa21f1162fb6ee1286197e6f0072753a499bf1[m
+Merge: 4781c5f acd3497
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Oct 14 15:36:24 2020 -0400
+
+    fixed conflict from issue-10
+
+[33mcommit 4781c5fe55e45c7ca0870e6f0aa0ca50fe94444c[m
+Merge: 67b896e ee731f1
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Fri Oct 9 11:45:07 2020 -0400
+
+    fixed conflicts of merging process
+
+[33mcommit 67b896ed7d462daf742050aa22f46efc742fdfd6[m[33m ([m[1;31mpedro/issue-9[m[33m, [m[1;31morigin/issue-9[m[33m, [m[1;32missue-9[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Oct 7 13:36:21 2020 -0400
+
+    added filters for good, bad, and all
+
+[33mcommit acd349764387f221f6870f821ba5e0361191b5aa[m[33m ([m[1;32missue-10[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Wed Oct 7 12:32:46 2020 -0400
+
+    modified readme to add npx
+
+[33mcommit ddd1bf8ba6a2a3d7e44f56e986c1e08f77805355[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Tue Oct 6 23:53:29 2020 -0400
+
+    removed unnecessary function
+
+[33mcommit ee731f15cb26167f136389da4d4ad9f8efcff4c7[m[33m ([m[1;31mpedro/issue-8[m[33m, [m[1;31morigin/issue-8[m[33m, [m[1;32missue-8[m[33m)[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Tue Oct 6 23:39:56 2020 -0400
+
+    added color option
+
+[33mcommit 65417a9bc8826068788e9bcfcbc54f50d934519a[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Mon Oct 5 09:48:09 2020 -0400
+
+    fixed version error
+
+[33mcommit 89a7591a57597edf8b6f297c66bff3c94048c366[m
+Author: Junyong Liu <60892464+tianlangwu@users.noreply.github.com>
+Date:   Thu Oct 1 15:48:04 2020 -0400
+
+    allow multiple file (#7)
+    
+    * allow multiple file
+    
+    * Update index.js
+    
+    used let instend of var
+    
+    Co-authored-by: Stella Jung <59578350+StellaJung-Student@users.noreply.github.com>
+
+[33mcommit e994906088f0d425c494034e08eece185b455315[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Tue Sep 29 15:59:31 2020 -0400
+
+    modified default timeout 120000
+
+[33mcommit c46d97022a2bbd6299894f554cdc665b25e28f93[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 27 16:47:35 2020 -0400
+
+    applied --version
+
+[33mcommit cc566d95df45576b27080d55475ab26dba8e285a[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 27 16:23:02 2020 -0400
+
+    fixed last idx for url
+
+[33mcommit 53afb4c10a4ea75f32990cf0ac15de569c53ce30[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Thu Sep 24 11:33:18 2020 -0400
+
+    added version and bin features
+
+[33mcommit d2f25c16d79d4c93ef4bd844b85a8b547f34da45[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Thu Sep 24 10:31:35 2020 -0400
+
+    added filter for duplicated urls
+
+[33mcommit 31849a5d6c84a2202a215f9a4885550d0012695e[m
+Merge: 078f035 e4d54f9
+Author: Stella Jung <59578350+StellaJung-Student@users.noreply.github.com>
+Date:   Mon Sep 21 21:55:11 2020 -0400
+
+    Merge pull request #1 from humphd/improve-speed
+    
+    Improve speed by adding 1.5s timeout, log to console as URLs are processed
+
+[33mcommit e4d54f9b70d5d9f71a26f256508df90b112c1be2[m
+Author: David Humphrey <david.humphrey@senecacollege.ca>
+Date:   Mon Sep 21 12:24:39 2020 -0400
+
+    Improve speed by adding 1.5s timeout, log to console as URLs are processed
+
+[33mcommit 078f03542c641c52ae7329711eb37b7aeab9bf56[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 20 22:51:57 2020 -0400
+
+    added extra files
+
+[33mcommit 9bf2cb17addcf81d86c69869dcbb20634c8c6506[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 20 22:45:46 2020 -0400
+
+    added gitignore
+
+[33mcommit 25a2eb7d1f23e5913d6de3bb928a09e6cd9d4ed7[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 20 22:45:20 2020 -0400
+
+    implemented http and https parser for http status
+
+[33mcommit 23d95ae89e2055b188a737546566a1baef8df5f0[m
+Author: Stella Jung <sojung@myseneca.ca>
+Date:   Sun Sep 20 22:42:58 2020 -0400
+
+    created r1 project for osd600

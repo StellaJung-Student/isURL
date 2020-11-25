@@ -25,6 +25,13 @@ describe('Test urlService', () => {
     isColor: true,
   };
 
+  const BADREQUESTURL = {
+    url: 'https://httpstat.us/404',
+    timeout: 12000,
+    filter: 'all',
+    isColor: true,
+  };
+
   const CORRECTURL = {
     url: 'https://www.google.com',
     timeout: 12000,
@@ -98,6 +105,12 @@ describe('Test urlService', () => {
     ).resolves.toMatch(`[good] ${CORRECTURL.url}`);
   });
 
+  it('should log with bad message when getStatus function is called with incorrect url', () => {
+    expect(
+      urlService.getStatus(BADREQUESTURL.url, BADREQUESTURL.timeout, BADREQUESTURL.filter, false)
+    ).resolves.toMatch(`[bad] ${BADREQUESTURL.url}`);
+  });
+
   // TODO: Please fix this test
   it('should log with good message when getStatus function is called with right url', (done) => {
     function callback(_, __) {
@@ -125,14 +138,6 @@ describe('Test urlService', () => {
     expect(spyFn).toBeCalledWith(GETNORMALCOUNT.correct);
     expect(result).toBe(3);
     spyFn.mockRestore();
-  });
-
-  it('should return empty string when getNormalCount function is called with incorrect data', async () => {
-    const error = { message: 'something error here' };
-    const spyFn = jest.spyOn(urlService, 'getNormalCount');
-    spyFn.mockReturnValue(Promise.reject(error));
-    const result = urlService.getNormalCount(GETNORMALCOUNT.correct, GETNORMALCOUNT.timeout);
-    expect(result).rejects.toEqual(error);
   });
 
   it('should return an array having the number of undefied when processToParseUrls function is called with correct data', async () => {
@@ -174,8 +179,8 @@ describe('Test urlService', () => {
     ).rejects.toEqual(new Error(errorMessage));
   });
 
-  it('should return reject("Server is not working") when result is empty in getContentFromLocalServer function', () => {
-    const errorMessage = 'Server is not working';
+  it('should return reject("no response") when result is empty in getContentFromLocalServer function', () => {
+    const errorMessage = 'no response';
     // JSON.parse = jest.fn().mockReturnValue([]); // I don't know why this mock doesn't work
     expect(
       urlService.getContentFromLocalServer(
@@ -184,6 +189,6 @@ describe('Test urlService', () => {
         LOCALSERVERURL.filter,
         LOCALSERVERURL.isColor
       )
-    ).rejects.toEqual(undefined); // (new Error(errorMessage));
+    ).rejects.toEqual(new Error(errorMessage)); // (new Error(errorMessage));
   });
 });

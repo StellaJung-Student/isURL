@@ -150,7 +150,7 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
       }
       const result = JSON.parse(res.body).map((post) => `${url}/${post.id}`);
       if (result.length === 0) {
-        reject(new Error('Server is not working'));
+        reject(new Error('no response'));
       }
       try {
         fs.writeFile(`posts.txt`, result.join('\n'), (err) => {
@@ -160,7 +160,7 @@ const getContentFromLocalServer = (url, timeout, filter, isColor) => {
       } catch (err) {
         return reject(err);
       }
-      return reject();
+      return reject(new Error('no response'));
     });
   });
 };
