@@ -179,8 +179,8 @@ describe('Test urlService', () => {
     ).rejects.toEqual(new Error(errorMessage));
   });
 
-  it('should return reject("Server is not working") when result is empty in getContentFromLocalServer function', () => {
-    const errorMessage = 'Server is not working';
+  it('should return reject("no response") when result is empty in getContentFromLocalServer function', () => {
+    const errorMessage = 'no response';
     // JSON.parse = jest.fn().mockReturnValue([]); // I don't know why this mock doesn't work
     expect(
       urlService.getContentFromLocalServer(
