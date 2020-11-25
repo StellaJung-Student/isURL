@@ -65,7 +65,17 @@
 - Check eslint standard
   - npm run eslint
 
-\*\*Integration to VScode
+**Integration to VScode**
 
 - Recommendation to install ESLint and Prettier.
 - check .vscode folder's settings.json and [here](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+**Usage - Test**
+```
+  Test Should be in __tests__ although the filename include "test".
+```
+
+- Check test
+  - npm run test
+- Check test coverage
+  - npm run test:coverage
