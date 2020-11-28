@@ -12,7 +12,7 @@
     "prettier": "prettier --check \"./**/*.{md,js,json}\"",
     "eslint": "eslint --ignore-path .gitignore .",
     "eslint-fix": "eslint --fix --ignore-path .gitignore .",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --",
     "test:coverage": "jest --coverage --detectOpenHandles"
   },
   "husky": {
@@ -43,6 +43,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
+    "execa": "^4.1.0",
     "jest": "^26.6.3",
     "request": "^2.88.2",
     "yargs": "^16.0.3"

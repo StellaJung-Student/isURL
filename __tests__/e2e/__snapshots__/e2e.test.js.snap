@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`e2e test urlpilgrim prints help message with arguments: -h 1`] = `
+"Usage: http-parser [option]
+
+Options:
+  -f, --file     Please provide a filename                              [string]
+  -i, --ignore   Please provide a file with URLs to ignore.             [string]
+  -t, --time     Provide ms for waiting for a request                   [number]
+  -l, --local    Provide a response from a local server
+  -a, --all
+  -g, --good
+  -b, --bad
+  -h, --help     Show usage information & exit                         [boolean]
+  -v, --version  Show version number                                   [boolean]"
+`;
