@@ -74,6 +74,12 @@ describe('Test urlService', () => {
     expect(urlService.isURL(ISURL.incorrect)).toBe(false);
   });
 
+  it('should return error object when getCount is sent a link with non-200 status code', () => {
+    expect(urlService.getNormalCount(BADREQUESTURL.url, 1500)).rejects.toEqual(
+      new Error('No urls')
+    );
+  });
+
   it('should return only url string when retrieveUrl function is called with correct data', () => {
     expect(urlService.retrieveUrl(RETRIEVEURL.correct)).toBe(
       'http://tea.cesaroliveira.net/archives/tag/seneca/feed'
@@ -92,11 +98,22 @@ describe('Test urlService', () => {
     expect(result).toBe(3);
     spyFn.mockRestore();
   });
-
   it('should log with unknown message when getStatus function is called with wrong url', () => {
     console.log = jest.fn();
-    urlService.getStatus(WRONGURL.url, WRONGURL.timeout, WRONGURL.filter, WRONGURL.isColor);
-    expect(console.log.mock.calls[0][0]).toMatch(`[unknown] ${WRONGURL.url}`);
+    expect(
+      urlService.getStatus(
+        'https://httpstat.us/201',
+        WRONGURL.timeout,
+        WRONGURL.filter,
+        WRONGURL.isColor
+      )
+    ).resolves.toMatch(`[unknown] https://httpstat.us/201`);
+  });
+  it('should log with unknown message when getStatus function is called with wrong url and isColor is false', () => {
+    console.log = jest.fn();
+    expect(
+      urlService.getStatus('https://httpstat.us/201', WRONGURL.timeout, WRONGURL.filter, false)
+    ).resolves.toMatch(`[unknown] https://httpstat.us/201`);
   });
 
   it('should log with good message when getStatus function is called with correct url', () => {
@@ -104,14 +121,17 @@ describe('Test urlService', () => {
       urlService.getStatus(CORRECTURL.url, CORRECTURL.timeout, CORRECTURL.filter, false)
     ).resolves.toMatch(`[good] ${CORRECTURL.url}`);
   });
-
+  it('should log with bad message when getStatus function is called with incorrect url and isColor is true', () => {
+    expect(
+      urlService.getStatus(BADREQUESTURL.url, BADREQUESTURL.timeout, BADREQUESTURL.filter, true)
+    ).resolves.toMatch(`[bad] ${BADREQUESTURL.url}`);
+  });
   it('should log with bad message when getStatus function is called with incorrect url', () => {
     expect(
       urlService.getStatus(BADREQUESTURL.url, BADREQUESTURL.timeout, BADREQUESTURL.filter, false)
     ).resolves.toMatch(`[bad] ${BADREQUESTURL.url}`);
   });
 
-  // TODO: Please fix this test
   it('should log with good message when getStatus function is called with right url', (done) => {
     function callback(_, __) {
       // res should be a parameter

@@ -76,7 +76,7 @@ const getStatus = (url, timeout, filter, isColor) => {
         } else {
           console.log(`[good] ${url}`);
         }
-      } else if ((status >= 400 || status <= 599) && (filter === 'all' || filter === 'bad')) {
+      } else if (status >= 400 && status <= 599 && (filter === 'all' || filter === 'bad')) {
         message = `[bad] ${url}`;
         if (isColor) {
           console.log(chalk.red(`[bad] ${url}`));
