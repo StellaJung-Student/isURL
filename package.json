@@ -1,9 +1,18 @@
 {
-  "name": "http-parser",
-  "version": "1.2.0",
-  "description": "",
+  "name": "http-checker",
+  "version": "2.0.0-beta.1",
+  "description": "If you want to check local api or some urls from file, this tool will be helpful to check the status of http or https.",
   "bin": {
-    "http-parser": "./index.js"
+    "http-checker": "./index.js"
+  },
+  "keywords": ["http", "https", "request", "node"],
+  "bugs": {
+    "url": "https://github.com/StellaJung-Student/http-parser/issues",
+    "email": "sojung@myseneca.ca"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StellaJung-Student/http-parser.git"
   },
   "main": "index.js",
   "scripts": {
@@ -27,7 +36,7 @@
       "npm run test:coverage"
     ]
   },
-  "author": "",
+  "author": "Stella Jung",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^7.13.0",

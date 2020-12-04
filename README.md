@@ -1,18 +1,22 @@
-# Http-parser
+# Http-checker
 
 ## This is a simple program to parse urls to check their status
 
 ### Node, Request, chalk are used for this project
 
-**Install**
+### How to install from npm
+
+This http-parser command-line tool is in npmjs.com now. Just enter `npm i http-checker` on the command line.
+
+**Local Install**
 
 ```
   1. Global mode
     npm install -g https://github.com/StellaJung-Student/http-parser
-    http-parser -f urls.txt
+    http-checker -f urls.txt
     Or
     npm install https://github.com/StellaJung-Student/http-parser
-    npx http-parser -f urls.txt
+    npx http-checker -f urls.txt
 
   2. Local mode
     npm intall
@@ -23,25 +27,25 @@
 
 ```
     1. default
-    > http-parser -f urls.txt or node index.js -f urls.txt
-    > http-parser -f urls1.txt -f urls2.html or node index.js -f urls1.txt -f urls2.html
+    > http-checker -f urls.txt or node index.js -f urls.txt
+    > http-checker -f urls1.txt -f urls2.html or node index.js -f urls1.txt -f urls2.html
 
     2. With timeout [ms]
-    > http-parser -f urls.txt -t 5000 or node index.js -f urls.txt -t 5000
+    > http-checker -f urls.txt -t 5000 or node index.js -f urls.txt -t 5000
 
     3. With filter
-    > http-parser -f urls.txt --good
-    > http-parser -f urls.txt --bad
-    > http-parser -f urls.txt --all cf) --all is default
+    > http-checker -f urls.txt --good
+    > http-checker -f urls.txt --bad
+    > http-checker -f urls.txt --all cf) --all is default
 
     4. optional ignoring urls from file
-    > http-parser -i ignoreurls.txt -f urls.txt
+    > http-checker -i ignoreurls.txt -f urls.txt
 
     5. version check
-    > http-parser -v or http-parser --version
+    > http-checker -v or http-checker --version
 
     6. from local server
-    > http-parser -l
+    > http-checker -l
 ```
 
 **Color Desription**
@@ -73,4 +77,10 @@
   -l or --local
   In this case, the pre condition is http://localhost:3000 should run - telescope.
   This option provides the latest 10 blogs url into post.txt
+```
+
+- 2.0.0
+
+```
+  Name is changed to http-checker for production
 ```
