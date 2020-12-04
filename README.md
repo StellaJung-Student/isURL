@@ -6,7 +6,7 @@
 
 ### How to install from npm
 
-This http-parser command-line tool is in npmjs.com now. Just enter `npm i http-checker` on the command line.
+This http-parser command-line tool is in npmjs.com now. Just enter `npm i -g http-checker` on the command line or you can use `npx http-checker -f urls.txt` if you don't want it as a global.
 
 **Local Install**
 

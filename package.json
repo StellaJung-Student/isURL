@@ -1,6 +1,6 @@
 {
   "name": "http-checker",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "If you want to check local api or some urls from file, this tool will be helpful to check the status of http or https.",
   "bin": {
     "http-checker": "./index.js"
